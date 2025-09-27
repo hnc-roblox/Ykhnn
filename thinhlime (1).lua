@@ -532,7 +532,7 @@ _tp = function(target)
   local distance = (target.Position - rootPart.Position).Magnitude
 
 -- Nếu trong phạm vi 1000 stud thì TP thẳng
-if distance <= 1000 then
+if distance <= 200 then
     rootPart.CFrame = target
     return
 end
@@ -2270,7 +2270,7 @@ local Initialize = Tabs.Settings:AddToggle("Initialize", {Title = "Fast Attck/M1
 Initialize:OnChanged(function(Value)
   _G.Seriality = Value
 end)
-local Bringmob = Tabs.Settings:AddToggle("Bringmob", {Title = "Bring Mobs [BETA]", Description = "", Default = true})
+local Bringmob = Tabs.Settings:AddToggle("Bringmob", {Title = "Bring Mobs [BETA]", Description = "", Default = false})
 Bringmob:OnChanged(function(Value)
   _B = Value
 end)
