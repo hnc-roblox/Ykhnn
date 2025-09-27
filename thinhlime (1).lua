@@ -532,7 +532,7 @@ _tp = function(target)
   local distance = (target.Position - rootPart.Position).Magnitude
 
 -- Nếu trong phạm vi 1000 stud thì TP thẳng
-if distance <= 200 then
+if distance <= 500 then
     rootPart.CFrame = target
     return
 end
@@ -663,7 +663,7 @@ end
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/hnc-roblox/Them/refs/heads/main/ThemeHNC.lua"))()
 local Window = Fluent:CreateWindow({
     Title="HNC Hub",
-    SubTitle="                 discord.gg/wa52S9VvPP", 
+    SubTitle="                discord.gg/wa52S9VvPP", 
     TabWidth=150, 
     Theme="Aqua",
     Acrylic=false,
