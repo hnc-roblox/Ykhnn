@@ -531,20 +531,40 @@ _tp = function(target)
   local rootPart = character.HumanoidRootPart
   local distance = (target.Position - rootPart.Position).Magnitude
 
--- Nếu trong phạm vi 1000 stud thì TP thẳng
-if distance <= 500 then
-    rootPart.CFrame = target
-    return
+local TweenService = game:GetService("TweenService")
+local plr = game.Players.LocalPlayer
+
+-- _tp nhận targetCFrame (CFrame)
+function _tp(targetCFrame)
+    local character = plr.Character or plr.CharacterAdded:Wait()
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+    local distance = (targetCFrame.Position - rootPart.Position).Magnitude
+
+    local speed = (distance <= 500) and 600 or 300
+    local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear)
+    -- Nếu bạn dùng block để tween thì đổi rootPart -> block; mình dùng rootPart cho trực tiếp
+    local tween = TweenService:Create(rootPart, tweenInfo, {CFrame = targetCFrame})
+
+    if plr.Character.Humanoid.Sit == true then
+        rootPart.CFrame = CFrame.new(rootPart.Position.X, targetCFrame.Y, rootPart.Position.Z)
+    end
+
+    tween:Play()
+
+    task.spawn(function()
+        while tween.PlaybackState == Enum.PlaybackState.Playing do
+            if not shouldTween then
+                tween:Cancel()
+                break
+            end
+            task.wait(0.1)
+        end
+    end)
 end
 
--- Nếu xa hơn 1000 thì bay mượt bằng tween
-local tweenInfo = TweenInfo.new(distance / 300, Enum.EasingStyle.Linear)
-local tween = game:GetService("TweenService"):Create(block, tweenInfo, {CFrame = target})    
-  if plr.Character.Humanoid.Sit == true then
-    block.CFrame = CFrame.new(block.Position.X, target.Y, block.Position.Z)
-  end  
-  tween:Play()    
-  task.spawn(function() while tween.PlaybackState == Enum.PlaybackState.Playing do if not shouldTween then tween:Cancel() break end task.wait(0.1) end end)
+-- TeleportToTarget gọn
+TeleportToTarget = function(targetCFrame)
+    _tp(targetCFrame)
 end
 TeleportToTarget = function(targetCFrame) if (targetCFrame.Position - plr.Character.HumanoidRootPart.Position).Magnitude > 1000 then _tp(targetCFrame)else _tp(targetCFrame)end end
 notween = function(p) plr.Character.HumanoidRootPart.CFrame = p end
