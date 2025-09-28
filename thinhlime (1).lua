@@ -533,7 +533,7 @@ _tp = function(target)
 
 -- Nếu trong phạm vi 1000 stud thì TP thẳng
 -- Xác định tốc độ tween (≤500 stud thì nhanh 600, xa hơn thì thường 300)
-local speed = (distance <= 500) and 1500 or 320
+local speed = (distance <= 700) and 1500000000 or 320
 
 local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear)
 local tween = game:GetService("TweenService"):Create(block, tweenInfo, {CFrame = target})
