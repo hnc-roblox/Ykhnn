@@ -533,7 +533,7 @@ _tp = function(target)
 
 -- Nếu trong phạm vi 1000 stud thì TP thẳng
 -- Xác định tốc độ tween (≤500 stud thì nhanh 600, xa hơn thì thường 300)
-local speed = (distance <= 500) and 600 or 300
+local speed = (distance <= 500) and 1500 or 320
 
 local tweenInfo = TweenInfo.new(distance / speed, Enum.EasingStyle.Linear)
 local tween = game:GetService("TweenService"):Create(block, tweenInfo, {CFrame = target})
@@ -670,8 +670,8 @@ end
 
 local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/hnc-roblox/Them/refs/heads/main/ThemeHNC.lua"))()
 local Window = Fluent:CreateWindow({
-    Title="HNC Hub",
-    SubTitle="                discord.gg/wa52S9VvPP", 
+    Title="HNC Hub [BETA]",
+    SubTitle="By HNC Roblox     discord.gg/wa52S9VvPP", 
     TabWidth=150, 
     Theme="Aqua",
     Acrylic=false,
